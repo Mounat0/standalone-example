@@ -30,7 +30,7 @@ public class SimpleExample {
 
     private static void createEmployee() {
         Employee e = new Employee();
-        e.set("first_name", "John");
+        e.set("first_name", "John2");
         e.set("last_name", "Doe");
         e.saveIt();
     }
