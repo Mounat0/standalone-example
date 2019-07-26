@@ -10,7 +10,7 @@ public class SimpleExample {
         Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/test?nullNamePatternMatchesAll=true", "root", "p@ssw0rd");
 
         createEmployee();
-        logger.info("=========> Created employee:");
+        logger.info("==========> Created employee:");
         selectEmployee();
         updateEmployee();
         logger.info("=========> Updated employee:");
