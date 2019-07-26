@@ -1,0 +1,40 @@
+# Maven
+# Build your Java project and run tests with Apache Maven.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/java
+
+trigger:
+- master
+
+#Build my environment a munat, there is a whole list of images
+#kayn ta self-hosted agents : 
+# check https://docs.microsoft.com/en-us/azure/devops/pipelines/agents/agents?view=azure-devops#install
+pool:
+  vmImage: 'vs2017-win2016'
+
+# here m building my code using Maven 
+steps:
+- task: Maven@3
+  inputs:
+    mavenPomFile: 'pom.xml'
+    mavenOptions: '-Xmx3072m'
+    javaHomeOption: 'JDKVersion'
+    jdkVersionOption: '1.11'
+    jdkArchitectureOption: 'x64'
+    publishJUnitResults: true
+    testResultsFiles: '**/TEST-*.xml'
+    goals: 'package'
+
+# 9alk khas n copy so i can publish the build artifact
+# not used anymore if m gonna use a pipeline artifact
+- task: CopyFiles@2
+  inputs:
+   Contents: '**/*.jar'
+   targetFolder: '$(Build.ArtifactStagingDirectory)'
+   
+#this task is to publish 
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'drop'
+    publishLocation: 'Container'
