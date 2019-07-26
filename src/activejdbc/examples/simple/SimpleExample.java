@@ -22,7 +22,7 @@ public class SimpleExample {
         logger.info("=========> Created employee:");
         selectEmployee();
         deleteAllEmployees();
-        logger.info("=========> Deleted all employees:");
+        logger.info("==========> Deleted all employees:");
         selectAllEmployees();
 
         Base.close();
